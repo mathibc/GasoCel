@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="authors" content="Arthur Rocha Silva; Matheus Iran Botelho Corrêa">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <title>GasoCel</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <style>
+    .slider {
+    width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.pCO2 {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}.HCO3 {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+
+</style>
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">GasoCel</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Sobre o GasoCel</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">Gasometria</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="post.html">Equilíbrio ácido/básico</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contato</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/Gasometria.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>GasoCel</h1>
+              <span class="subheading">Uma abordagem simples <br> para o ensino do Equilíbrio Ácido/Básico</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Valor de referência -->
+    <center>
+
+    <span class="meta">
+      Gasometria Arterial<br>
+      Valores de referência de normalidade:<br>
+      pH<br>
+      7,35 a 7,45<br>
+      pCO2<br>
+      35,0 a 45,0 mmHg<br>
+      pO2<br>
+      80,0 a 95,0 mmHg<br>
+      HCO3-<br>
+      20,0 a 30,0 mEq/l plasma<br>
+      CO2 total<br>
+      21,1 a 31,4 mEq/l plasma<br>
+      BE<br>
+      -3,0 a +3,0 mEq/l sangue<br>
+      Saturação de O2<br>
+      92,0 a 98,0 %<a href="#"></a>
+    </span>
+  </center>
+
+    <!-- myChart -->
+    <div class="container">
+	     <canvas id="myChart"></canvas>
+    </div>
+
+    <!-- myChart Logic -->
+    <script>
+    var c =0.01;
+    var PCO2;
+    var PH ;
+    var HCO3;
+
+
+    function gasometria(){
+      this.PCO2 = document.getElementById("pCO2r").value;
+      this.HCO3 = document.getElementById("HCO3r").value;
+
+	    this.PH =4.5 + Math.log(HCO3/(0.03*PCO2));
+
+	    massPopChart.data.datasets[0].data[0] = PCO2;
+  		massPopChart.data.datasets[0].data[1] = PH;
+  		massPopChart.data.datasets[0].data[2] = HCO3;
+
+  		massPopChart.update();
+    }
+    let myChart = document.getElementById('myChart').getContext('2d');
+	  let massPopChart = new Chart (myChart,{
+      type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
+      data:{
+        labels:['pCO2 mmHg','pH','HCO3- mEq/L'],
+        datasets:[{
+          label:'Valor',
+          data:[
+            PCO2,
+            PH,
+            HCO3
+          ],
+          backgroundColor:[
+            '#2644ef',
+            '#35d68d',
+            '#ddae2c',
+            '#e52952',
+            '#f1f41f'
+          ]
+        }]
+      },
+      options: {}
+    });
+
+    function showDiv() {
+       document.getElementById('welcomeDiv').style.display = "block";
+    }
+    function showAnswer(){
+      var a;
+      if(PH > 7.45 && PCO2<35){
+        a = "Alcalose Respiratória";
+        document.getElementById("AR").innerHTML = a
+
+      }
+      else if(PH < 7.35 && PCO2>45){
+        a = "Acidose Respiratória";
+        document.getElementById("AR").innerHTML = a
+
+
+
+      }
+      else if(PH > 7.45 && HCO3>26){
+        a = "Alcalose Metabólica";
+        document.getElementById("AR").innerHTML = a
+
+
+
+      }
+      else if(PH < 7.35 && HCO3<22){
+        a = "Acidose Metabólica";
+        document.getElementById("AR").innerHTML = a
+
+
+
+      }
+    }
+  </script>
+
+  <!-- Input Chart -->
+
+  <center>
+    <div class="slider">
+    <form name="formulario" method="get" action="">
+      Insira o valor da pCO2: <input id="pCO2r" type="range" class="pCO2" name="foo" placeholder="20 a 120 mmHg" min="20" max="120" style="width: 130px">
+      <br> <span>Valor pCO2:</span> <span id="pCO2x" style="font-weight:bold;color:red">49</span>
+<br><br>
+      Insira o valor de HCO3: <input id="HCO3r" type="range" class="HCO3" name="foo" placeholder="15 a 35 mEq/L" min="15" max="35" style="width: 130px"><br>
+      <span>Valor HCO3:</span> <span id="HCO3y" style="font-weight:bold;color:red">49</span><br>
+      <br>
+      <br>
+      <button  onclick="gasometria()" type="button" class="btn btn-outline-primary">Gasometria</button>
+      <br>
+      <br>
+      <br>
+
+	<!--Avaliar Compensação: <br>
+	Agudo - > Respiratório () <br>
+	Crônico -> Respiratório (DPOC) <br>
+	Insira o valor da frequência respiratória: <!--<input id="Fr" type="range" name="number4" placeholder="10 a 25 RPM" min="10" max="25" style="width: 130px"><br><br>
+	Insira o valor do pH da urina: <input id="PHU" type="range" name="number5" placeholder="6.85 a 7.25" min="6.85" step="0.01" max="7.25" style="width: 130px"><br><br>
+-->
+	<br><br>
+
+
+ </div>
+</center>
+
+<!-- Buttons to select the Answer -->
+<center>
+
+  <input type="button" name="answer" class="btn btn-outline-secondary" value="Resposta" onclick="showAnswer()" /><br><br>
+  <span id="AR" style="font-weight:bold;color:grey"></span>
+
+</div>
+</center>
+
+<script>
+
+
+
+</script>
+
+<script>
+
+var slideCol = document.getElementById("pCO2r");
+
+var x = document.getElementById("pCO2x");
+
+
+x.innerHTML = slideCol.value;
+
+
+
+
+slideCol.oninput = function() {
+    x.innerHTML = this.value;
+}
+
+
+
+
+
+
+</script>
+
+<script>
+var slideSq = document.getElementById("HCO3r");
+var y = document.getElementById("HCO3y");
+y.innerHTML = slideSq.value;
+slideSq.oninput = function() {
+    y.innerHTML = this.value;
+
+}
+
+
+</script>
+<br><br>
+
+
+<!-- Buttons to select the type of compensation -->
+<!--<center>
+<div class="container">
+
+
+<button  onclick="Compensação1()" type="button" class="btn btn-outline-primary">Compensação1</button>
+<button  onclick="Compensação2()" type="button" class="btn btn-outline-primary">Compensação2</button>
+<button  onclick="Compensação3()" type="button" class="btn btn-outline-primary">Compensação3</button>
+<br>
+<button  onclick="Compensação4()" type="button" class="btn btn-outline-primary">Compensação4</button>
+<button  onclick="Compensação5()" type="button" class="btn btn-outline-primary">Compensação5</button>
+<button  onclick="Compensação6()" type="button" class="btn btn-outline-primary">Compensação6</button>
+
+
+
+</div>
+</center>
+-->
+
+
+
+
+
+<!-- DiagnosisChart -->
+<!--<div class="container">
+   <canvas id="Diagnosis1"></canvas>
+   <br>
+   <br>
+   <button  onclick="Resposta1()" type="button" class="btn btn-outline-primary">Resposta</button>
+</div>
+
+<!-- DiagnosisChart -->
+<!--<div class="container">
+   <canvas id="Diagnosis2"></canvas>
+   <br>
+   <br>
+   <button  onclick="Resposta2()" type="button" class="btn btn-outline-primary">Resposta</button>
+</div>
+
+<!-- DiagnosisChart -->
+<!--<div class="container">
+   <canvas id="Diagnosis3"></canvas>
+   <br>
+   <br>
+   <button  onclick="Resposta3()" type="button" class="btn btn-outline-primary">Resposta</button>
+</div>
+
+<!-- DiagnosisChart -->
+<!--<div class="container">
+   <canvas id="Diagnosis4"></canvas>
+   <br>
+   <br>
+   <button  onclick="Resposta4()" type="button" class="btn btn-outline-primary">Resposta</button>
+</div>
+
+<!-- DiagnosisChart -->
+<!--<div class="container">
+   <canvas id="Diagnosis5"></canvas>
+   <br>
+   <br>
+   <button  onclick="Resposta5()" type="button" class="btn btn-outline-primary">Resposta</button>
+</div>
+
+<!-- DiagnosisChart -->
+<!--<div class="container">
+   <canvas id="Diagnosis6"></canvas>
+   <br>
+   <br>
+   <button  onclick="Resposta6()" type="button" class="btn btn-outline-primary">Resposta</button>
+</div>
+
+<!-- myChart Logic
+<script>
+
+ function Compensação1(){
+let Diagnosis1 = document.getElementById('Diagnosis1').getContext('2d');
+let massPopChart = new Chart (Diagnosis2,{
+  type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
+  data:{
+    labels:['pCO2 mmHg','pH','HCO3- mEq/L','Fr','pH urina'],
+    datasets:[{
+      label:'Valor',
+      data:[
+        pCO2,
+        PH,
+        HCO3,
+        Fr,
+        PHU
+      ],
+      backgroundColor:[
+        '#2644ef',
+        '#35d68d',
+        '#ddae2c',
+        '#e52952',
+        '#f1f41f'
+      ]
+    }]
+  },
+  options: {}
+});
+}
+function Compensação2(){
+let Diagnosis2 = document.getElementById('Diagnosis2').getContext('2d');
+let massPopChart = new Chart (Diagnosis2,{
+type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
+data:{
+  labels:['pCO2 mmHg','pH','HCO3- mEq/L','Fr','pH urina'],
+  datasets:[{
+    label:'Valor',
+    data:[
+      pCO2,
+      PH,
+      HCO3,
+      Fr,
+      PHU
+    ],
+    backgroundColor:[
+      '#2644ef',
+      '#35d68d',
+      '#ddae2c',
+      '#e52952',
+      '#f1f41f'
+    ]
+  }]
+},
+options: {}
+});
+}
+function Compensação3(){
+let Diagnosis3 = document.getElementById('Diagnosis3').getContext('2d');
+let massPopChart = new Chart (Diagnosis3,{
+type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
+data:{
+  labels:['pCO2 mmHg','pH','HCO3- mEq/L','Fr','pH urina'],
+  datasets:[{
+    label:'Valor',
+    data:[
+      pCO2,
+      PH,
+      HCO3,
+      Fr,
+      PHU
+    ],
+    backgroundColor:[
+      '#2644ef',
+      '#35d68d',
+      '#ddae2c',
+      '#e52952',
+      '#f1f41f'
+    ]
+  }]
+},
+options: {}
+});
+}
+function Compensação4(){
+let Diagnosis4 = document.getElementById('Diagnosis4').getContext('2d');
+let massPopChart = new Chart (Diagnosis4,{
+type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
+data:{
+  labels:['pCO2 mmHg','pH','HCO3- mEq/L','Fr','pH urina'],
+  datasets:[{
+    label:'Valor',
+    data:[
+      pCO2,
+      PH,
+      HCO3,
+      Fr,
+      PHU
+    ],
+    backgroundColor:[
+      '#2644ef',
+      '#35d68d',
+      '#ddae2c',
+      '#e52952',
+      '#f1f41f'
+    ]
+  }]
+},
+options: {}
+});
+}
+function Compensação5(){
+let Diagnosis5 = document.getElementById('Diagnosis5').getContext('2d');
+let massPopChart = new Chart (Diagnosis5,{
+type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
+data:{
+  labels:['pCO2 mmHg','pH','HCO3- mEq/L','Fr','pH urina'],
+  datasets:[{
+    label:'Valor',
+    data:[
+      pCO2,
+      PH,
+      HCO3,
+      Fr,
+      PHU
+    ],
+    backgroundColor:[
+      '#2644ef',
+      '#35d68d',
+      '#ddae2c',
+      '#e52952',
+      '#f1f41f'
+    ]
+  }]
+},
+options: {}
+});
+}
+function Compensação6(){
+let Diagnosis6 = document.getElementById('Diagnosis6').getContext('2d');
+let massPopChart = new Chart (Diagnosis6,{
+type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
+data:{
+  labels:['pCO2 mmHg','pH','HCO3- mEq/L','Fr','pH urina'],
+  datasets:[{
+    label:'Valor',
+    data:[
+      pCO2,
+      PH,
+      HCO3,
+      Fr,
+      PHU
+    ],
+    backgroundColor:[
+      '#2644ef',
+      '#35d68d',
+      '#ddae2c',
+      '#e52952',
+      '#f1f41f'
+    ]
+  }]
+},
+options: {}
+});
+}</script>
+-->
+
+
+
+
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-preview">
+            <a href="post.html">
+              <h2 class="post-title">
+                Man must explore, and this is exploration at its greatest
+              </h2>
+              <h3 class="post-subtitle">
+                Problems look mighty small from 150 miles up
+              </h3>
+            </a>
+            <p class="post-meta">Posted by
+              <a href="#">Start Bootstrap</a>
+              on September 24, 2018</p>
+          </div>
+          <hr>
+          <div class="post-preview">
+            <a href="post.html">
+              <h2 class="post-title">
+                I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
+              </h2>
+            </a>
+            <p class="post-meta">Posted by
+              <a href="#">Start Bootstrap</a>
+              on September 18, 2018</p>
+          </div>
+          <hr>
+          <div class="post-preview">
+            <a href="post.html">
+              <h2 class="post-title">
+                Science has not yet mastered prophecy
+              </h2>
+              <h3 class="post-subtitle">
+                We predict too much for the next year and yet far too little for the next ten.
+              </h3>
+            </a>
+            <p class="post-meta">Posted by
+              <a href="#">Start Bootstrap</a>
+              on August 24, 2018</p>
+          </div>
+          <hr>
+          <div class="post-preview">
+            <a href="post.html">
+              <h2 class="post-title">
+                Failure is not an option
+              </h2>
+              <h3 class="post-subtitle">
+                Many say exploration is part of our destiny, but it’s actually our duty to future generations.
+              </h3>
+            </a>
+            <p class="post-meta">Posted by
+              <a href="#">Start Bootstrap</a>
+              on July 8, 2018</p>
+          </div>
+          <hr>
+          <!-- Pager -->
+          <div class="clearfix">
+            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright GETA&copy; Your Website 2018</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+
+  </body>
+
+</html>
