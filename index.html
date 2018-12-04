@@ -134,12 +134,12 @@
     function gasometria(){
       this.PCO2 = document.getElementById("pCO2r").value;
       this.HCO3 = document.getElementById("HCO3r").value;
-
-	    this.PH =4.5 + Math.log(HCO3/(0.03*PCO2));
+      var H = HCO3/(0.03*PCO2);
+	    this.PH =6.1 + Math.log10(H);
 
 	    massPopChart.data.datasets[0].data[0] = PCO2;
-  		massPopChart.data.datasets[0].data[1] = PH;
-  		massPopChart.data.datasets[0].data[2] = HCO3;
+  	    massPopChart.data.datasets[0].data[1] = PH;
+  	    massPopChart.data.datasets[0].data[2] = HCO3;
 
   		massPopChart.update();
     }
