@@ -135,6 +135,7 @@
       this.PCO2 = document.getElementById("pCO2r").value;
       this.HCO3 = document.getElementById("HCO3r").value;
       var H = HCO3/(0.03*PCO2);
+      var b;
 	    this.PH =6.1 + Math.log10(H);
 
 	    massPopChart.data.datasets[0].data[0] = PCO2;
@@ -142,6 +143,8 @@
   	    massPopChart.data.datasets[0].data[2] = HCO3;
 
   		massPopChart.update();
+	    b = "O valor do pH é: "+PH;
+      document.getElementById("PHr").innerHTML = b
     }
     let myChart = document.getElementById('myChart').getContext('2d');
 	  let massPopChart = new Chart (myChart,{
@@ -212,15 +215,15 @@
     <div class="slider">
     <form name="formulario" method="get" action="">
       Insira o valor da pCO2: <input id="pCO2r" type="range" class="pCO2" name="foo" placeholder="20 a 120 mmHg" min="20" max="120" style="width: 130px">
-      <br> <span>Valor pCO2:</span> <span id="pCO2x" style="font-weight:bold;color:red">49</span>
+      <br> <span>Valor pCO2:</span> <span id="pCO2x" style="font-weight:bold;color:#2644ef"></span>
 <br><br>
       Insira o valor de HCO3: <input id="HCO3r" type="range" class="HCO3" name="foo" placeholder="15 a 35 mEq/L" min="15" max="35" style="width: 130px"><br>
-      <span>Valor HCO3:</span> <span id="HCO3y" style="font-weight:bold;color:red">49</span><br>
+      <span>Valor HCO3:</span> <span id="HCO3y" style="font-weight:bold;color:#ddae2c"></span><br>
       <br>
       <br>
       <button  onclick="gasometria()" type="button" class="btn btn-outline-primary">Gasometria</button>
       <br>
-      <br>
+      <br><span id="PHr" style="font-weight:bold;color:#35d68d"></span>
       <br>
 
 	<!--Avaliar Compensação: <br>
