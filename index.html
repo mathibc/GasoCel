@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-	
+
   <head>
 
     <meta charset="utf-8">
@@ -114,7 +114,7 @@
       35,0 a 45,0 mmHg<br>
       HCO3-<br>
       22,0 a26,0 mEq/l plasma<br>
-      
+
     </span>
   </center>
 	  <br>
@@ -172,40 +172,70 @@
       options: {}
     });
 
+
+
     function showDiv() {
        document.getElementById('welcomeDiv').style.display = "block";
     }
     function showAnswer(){
       var a;
-      if(PH > 7.45 && PCO2<35){
+			if(PH > 7.35 && PH<7.45){
+        a = "Dentro dos valores de normalidade de PH";
+        document.getElementById("AR").innerHTML = a
+      }
+			else if(PH > 7.45 && PCO2<35 && HCO3>26){
+        a = "Alcalose Respiratória com Alcalose Metabólica";
+        document.getElementById("AR").innerHTML = a
+      }
+			else if(PH > 7.45 && PCO2<35 && HCO3<22){
+        a = "Alcalose Respiratória com Acidose Metabólica";
+        document.getElementById("AR").innerHTML = a
+      }
+			else if(PH < 7.35 && PCO2>45 && HCO3>26){
+        a = "Acidose Respiratória com Alcalose Metabólica";
+        document.getElementById("AR").innerHTML = a
+      }
+			else if(PH < 7.35 && PCO2>45 && HCO3<22){
+        a = "Acidose Respiratória com Acidose Metabólica";
+        document.getElementById("AR").innerHTML = a
+      }
+
+      else if(PH > 7.45 && PCO2<35){
         a = "Alcalose Respiratória";
         document.getElementById("AR").innerHTML = a
-
+      }
+			else if(PH > 7.45 && HCO3>26 && PCO2>45){
+        a = "Alcalose Metabólica com Acidose Respiratória";
+        document.getElementById("AR").innerHTML = a
+      }
+			else if(PH > 7.45 && HCO3>26 && PCO2<35){
+        a = "Alcalose Metabólica com Alcalose respiratória";
+        document.getElementById("AR").innerHTML = a
+      }
+			else if(PH > 7.45 && HCO3>26){
+        a = "Alcalose Metabólica";
+        document.getElementById("AR").innerHTML = a
       }
       else if(PH < 7.35 && PCO2>45){
         a = "Acidose Respiratória";
         document.getElementById("AR").innerHTML = a
-
-
-
       }
-      else if(PH > 7.45 && HCO3>26){
-        a = "Alcalose Metabólica";
+			else if(PH < 7.35 && HCO3<22 && PCO2>45){
+        a = "Acidose Metabólica com Acidose Respiratória";
         document.getElementById("AR").innerHTML = a
-
-
-
+      }
+			else if(PH < 7.35 && HCO3<22 && PCO2<35){
+        a = "Acidose Metabólica com Alcalose respiratória";
+        document.getElementById("AR").innerHTML = a
       }
       else if(PH < 7.35 && HCO3<22){
         a = "Acidose Metabólica";
         document.getElementById("AR").innerHTML = a
 
-
-
       }
       else if (HCO3==22 || HCO3==23 || HCO3==24 || HCO3==25 || HCO3 == 26 && PCO2==35 || PCO2==36 || PCO2 ==37 || PCO2==38 || PCO2==39 || PCO2 == 40 || PCO2 == 41 || PCO2 == 42 || PCO2==43 ||
          PCO2==44 ||PCO2==45) {
-	a = "Dentro dos valores de normalidade";
+	a = "Dentro dos parâmetros de normalidade";
         document.getElementById("AR").innerHTML = a
     }
     }
@@ -607,7 +637,7 @@ options: {}
           <div class="col-lg-8 col-md-10 mx-auto">
             <ul class="list-inline text-center">
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://github.com/mathibc/GasoCel">
                   <span class="fa-stack fa-lg">
                     <i class="fas fa-circle fa-stack-2x"></i>
                     <i class="fab fa-github fa-stack-1x fa-inverse"></i>
