@@ -77,6 +77,9 @@
               <a class="nav-link" href="about.html">Gasometria</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="test.html">Casos Clínicos</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="post.html">Equilíbrio ácido/básico</a>
             </li>
             <li class="nav-item">
@@ -113,7 +116,7 @@
       pCO2<br>
       35,0 a 45,0 mmHg<br>
       HCO3-<br>
-      22,0 a26,0 mEq/l plasma<br>
+      22,0 a 26,0 mEq/l plasma<br>
 
     </span>
   </center>
@@ -190,20 +193,28 @@
         document.getElementById("AR").innerHTML = a
       }
 			else if(PH > 7.45 && PCO2<35 && HCO3>26){
-        a = "Alcalose Respiratória com Alcalose Metabólica";
+        a = "Alcalose Respiratória";
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
         document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 			else if(PH > 7.45 && PCO2<35 && HCO3<22){
-        a = "Alcalose Respiratória com Acidose Metabólica";
+        a = "Alcalose Respiratória";
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
         document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 			else if(PH < 7.35 && PCO2>45 && HCO3>26){
-        a = "Acidose Respiratória com Alcalose Metabólica";
+        a = "Acidose Respiratória";
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
         document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 			else if(PH < 7.35 && PCO2>45 && HCO3<22){
-        a = "Acidose Respiratória com Acidose Metabólica";
+        a = "Acidose Respiratória";
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
         document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 
       else if(PH > 7.45 && PCO2<35){
@@ -211,12 +222,18 @@
         document.getElementById("AR").innerHTML = a
       }
 			else if(PH > 7.45 && HCO3>26 && PCO2>45){
-        a = "Alcalose Metabólica com Acidose Respiratória";
+        a = "Alcalose Metabólica Mista";
         document.getElementById("AR").innerHTML = a
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
+        document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 			else if(PH > 7.45 && HCO3>26 && PCO2<35){
-        a = "Alcalose Metabólica com Alcalose respiratória";
+        a = "Alcalose Metabólica Mista";
         document.getElementById("AR").innerHTML = a
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
+        document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 			else if(PH > 7.45 && HCO3>26){
         a = "Alcalose Metabólica";
@@ -227,12 +244,18 @@
         document.getElementById("AR").innerHTML = a
       }
 			else if(PH < 7.35 && HCO3<22 && PCO2>45){
-        a = "Acidose Metabólica com Acidose Respiratória";
+        a = "Acidose Metabólica Mista";
         document.getElementById("AR").innerHTML = a
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
+        document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 			else if(PH < 7.35 && HCO3<22 && PCO2<35){
-        a = "Acidose Metabólica com Alcalose respiratória";
+        a = "Acidose Metabólica Mista";
         document.getElementById("AR").innerHTML = a
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
+        document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
       else if(PH < 7.35 && HCO3<22){
         a = "Acidose Metabólica";
@@ -340,10 +363,10 @@
   <center>
     <div class="slider">
     <form name="formulario" method="get" action="">
-      Insira o valor da pCO2: <input id="pCO2r" type="range" class="pCO2" name="foo" placeholder="20 a 120 mmHg" min="20" max="120" style="width: 130px">
+      Insira o valor da pCO2: <input id="pCO2r" type="range" class="pCO2" name="foo" placeholder="10 a 120 mmHg" min="10" max="120" style="width: 130px">
       <br> <span>Valor pCO2:</span> <span id="pCO2x" style="font-weight:bold;color:#2644ef"></span>
 <br><br>
-      Insira o valor de HCO3: <input id="HCO3r" type="range" class="HCO3" name="foo" placeholder="15 a 35 mEq/L" min="8" max="50" style="width: 130px"><br>
+      Insira o valor de HCO3: <input id="HCO3r" type="range" class="HCO3" name="foo" placeholder="5 a 80 mEq/L" min="5" max="80" style="width: 130px"><br>
       <span>Valor HCO3:</span> <span id="HCO3y" style="font-weight:bold;color:#ddae2c"></span><br>
       <br>
       <br>
@@ -364,6 +387,8 @@
 
   <input type="button" name="answer" class="btn btn-outline-secondary" value="Resposta" onclick="showAnswer()" /><br><br>
   <span id="AR" style="font-weight:bold;color:grey"></span>
+  <br>
+  <span id="AR1" style="font-weight:bold;color:grey"></span>
 
 </div>
 </center>
@@ -412,6 +437,7 @@ slideSq.oninput = function() {
 
 
 <!-- Buttons to select the type of compensation -->
+<!--
 <center>
 	<h2>Compensação</h2><br><br><br>
 <div class="container">
@@ -458,8 +484,6 @@ slideSq.oninput = function() {
 
 </div>
 </center>
-
-
 
 
 
