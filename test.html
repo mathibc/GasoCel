@@ -193,20 +193,28 @@
         document.getElementById("AR").innerHTML = a
       }
 			else if(PH > 7.45 && PCO2<35 && HCO3>26){
-        a = "Alcalose Respiratória com Alcalose Metabólica";
+        a = "Alcalose Respiratória";
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
         document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 			else if(PH > 7.45 && PCO2<35 && HCO3<22){
-        a = "Alcalose Respiratória com Acidose Metabólica";
+        a = "Alcalose Respiratória";
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
         document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 			else if(PH < 7.35 && PCO2>45 && HCO3>26){
-        a = "Acidose Respiratória com Alcalose Metabólica";
+        a = "Acidose Respiratória";
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
         document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 			else if(PH < 7.35 && PCO2>45 && HCO3<22){
-        a = "Acidose Respiratória com Acidose Metabólica";
+        a = "Acidose Respiratória";
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
         document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 
       else if(PH > 7.45 && PCO2<35){
@@ -214,12 +222,18 @@
         document.getElementById("AR").innerHTML = a
       }
 			else if(PH > 7.45 && HCO3>26 && PCO2>45){
-        a = "Alcalose Metabólica com Acidose Respiratória";
+        a = "Alcalose Metabólica Mista";
         document.getElementById("AR").innerHTML = a
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
+        document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 			else if(PH > 7.45 && HCO3>26 && PCO2<35){
-        a = "Alcalose Metabólica com Alcalose respiratória";
+        a = "Alcalose Metabólica Mista";
         document.getElementById("AR").innerHTML = a
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
+        document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 			else if(PH > 7.45 && HCO3>26){
         a = "Alcalose Metabólica";
@@ -230,12 +244,18 @@
         document.getElementById("AR").innerHTML = a
       }
 			else if(PH < 7.35 && HCO3<22 && PCO2>45){
-        a = "Acidose Metabólica com Acidose Respiratória";
+        a = "Acidose Metabólica Mista";
         document.getElementById("AR").innerHTML = a
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
+        document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
 			else if(PH < 7.35 && HCO3<22 && PCO2<35){
-        a = "Acidose Metabólica com Alcalose respiratória";
+        a = "Acidose Metabólica Mista";
         document.getElementById("AR").innerHTML = a
+        b= "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar o valor do Base Excess para estabelecer o diagnóstico correto a partir da fórmula (HCO3 real – 24) + 14,8 x (pH- 7,4)";
+        document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
       }
       else if(PH < 7.35 && HCO3<22){
         a = "Acidose Metabólica";
