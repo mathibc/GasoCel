@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
   <head>
 
@@ -124,9 +124,30 @@
 	  <br>
 
     <!-- myChart -->
-    <div class="container">
+    <div class="container" >
 	     <canvas id="myChart"></canvas>
+
+
+
     </div>
+    <!--
+    <div class="container" >
+
+       <canvas id="myChart2"></canvas>
+
+
+
+    </div>
+    <br><br>
+    <div class="container">
+
+       <canvas id="myChart3"></canvas>
+
+
+    </div>*/
+
+
+
 
     <!-- myChart Logic -->
     <script>
@@ -135,6 +156,12 @@
     var PH ;
     var HCO3;
 		var resposta;
+    var chartColors={
+      color1: '#9a0000',
+      color3: '#0017b0',
+      color2: '#1f8e19'
+    }
+
 
 
 
@@ -146,36 +173,112 @@
 	    this.PH =6.1 + Math.log10(H);
 
 	    massPopChart.data.datasets[0].data[0] = PCO2;
-  	    massPopChart.data.datasets[0].data[1] = PH;
-  	    massPopChart.data.datasets[0].data[2] = HCO3;
+      massPopChart.data.datasets[0].data[2] = PH;
+      massPopChart.data.datasets[0].data[1] = HCO3;
+  	    /*massPopChart3.data.datasets[0].data[0] = PH;
+  	    massPopChart2.data.datasets[0].data[0] = HCO3;*/
+
+        for (var i = 0; i <= dataset.data.length; i++) {
+    if (dataset.data[2] <7.35) {
+      dataset.backgroundColor[2] = chartColors.color1;
+      massPopChart.update();
+    }
+    else if ((dataset.data[2]>= 7.35) && (dataset.data[2] <= 7.45)){
+      dataset.backgroundColor[2] = chartColors.color2;
+      massPopChart.update();
+    }
+    else if (dataset.data[2]> 7.45){
+     dataset.backgroundColor[2] = chartColors.color3;
+     massPopChart.update();
+    }
+  }
 
   		massPopChart.update();
+      /*	massPopChart2.update();
+        	massPopChart3.update();*/
 	    b = "O valor do pH é: "+PH;
       document.getElementById("PHr").innerHTML = b
+
     }
+
     let myChart = document.getElementById('myChart').getContext('2d');
+
 	  let massPopChart = new Chart (myChart,{
-      type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
+      type:'polarArea', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
       data:{
-        labels:['pCO2 mmHg','pH','HCO3- mEq/L'],
+        labels:['pCO2 mmHg', 'HCO3- mEq/L','pH'],
         datasets:[{
           label:'Valor',
           data:[
-            PCO2,
-            PH,
-            HCO3
+            PCO2,HCO3,PH
+
           ],
           backgroundColor:[
-            '#2644ef',
-            '#35d68d',
-            '#ddae2c',
-            '#e52952',
-            '#f1f41f'
+            '#690057','#f1f41f','#234234'
+
           ]
         }]
       },
       options: {}
     });
+    /*let myChart2 = document.getElementById('myChart2').getContext('2d');
+	  let massPopChart2 = new Chart (myChart2,{
+      type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
+      data:{
+        labels:['HCO3- mEq/L'],
+        datasets:[{
+          label:'Valor',
+          data:[
+            HCO3
+          ],
+          backgroundColor:[
+          '#f1f41f'
+          ]
+        }]
+      },
+      options: {}
+    });
+
+
+
+    let myChart3 = document.getElementById('myChart3').getContext('2d');
+	  let massPopChart3 = new Chart (myChart3,{
+      type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
+      data:{
+        labels:['pH'],
+        datasets:[{
+          label:'Valor',
+          data:[
+            PH
+          ],
+          backgroundColor:[
+
+
+          ]
+        }]
+      },
+      options: {}
+    });
+*/
+    var dataset = massPopChart.data.datasets[0];
+
+      /*if (dataset.data[0] < 7.35) {
+        dataset.backgroundColor[0] = chartColors.color1;
+        massPopChart3.update();
+      }
+      else if ((dataset.data[0] >= 7.35) && (dataset.data[0] <= 7.45)){
+        dataset.backgroundColor[0] = chartColors.color2;
+        massPopChart3.update();
+      }
+      else if (PH > 7.45){
+       dataset.backgroundColor[0] = chartColors.color3;
+       massPopChart3.update();
+     }*/
+
+
+
+
+
 
 
 
@@ -236,7 +339,7 @@
       }
 			else if(PH < 7.35 && PCO2>45 && HCO3<22){
         a = "Acidose Mista";
-        b = "Devido existir tanto um combonente respiratória quanto um metabólico tornando o PH ácido.";
+        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o PH ácido.";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
 
@@ -256,7 +359,7 @@
 			else if(PH > 7.45 && HCO3>26 && PCO2<35){
         a = "Alcalose Mista";
 
-        b = "Devido existir tanto um combonente respiratória quanto um metabólico tornando o PH básico.";
+        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o PH básico.";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
       }
@@ -403,16 +506,16 @@
   <center>
     <div class="slider">
     <form name="formulario" method="get" action="">
-      Insira o valor da pCO2: <input id="pCO2r" type="range" class="pCO2" name="foo" placeholder="10 a 120 mmHg" min="10" max="120" style="width: 130px">
-      <br> <span>Valor pCO2:</span> <span id="pCO2x" style="font-weight:bold;color:#2644ef"></span>
+      Insira o valor da pCO2: <input id="pCO2r" type="number" class="pCO2" name="foo" placeholder="" min="" max="" style="width: 130px">
+      <!--<br><br> <span>Valor pCO2:</span> <span id="pCO2x" style="font-weight:bold;color:#690057"></span>-->
 <br><br>
-      Insira o valor de HCO3: <input id="HCO3r" type="range" class="HCO3" name="foo" placeholder="5 a 80 mEq/L" min="5" max="80" style="width: 130px"><br>
-      <span>Valor HCO3:</span> <span id="HCO3y" style="font-weight:bold;color:#ddae2c"></span><br>
+      Insira o valor de HCO3: <input id="HCO3r" type="number" class="HCO3" name="foo" placeholder="" min="" max="" style="width: 130px"><br>
+      <!--<br><span>Valor HCO3:</span> <span id="HCO3y" style="font-weight:bold;color:#f1f41f"></span><br>-->
       <br>
       <br>
       <button  onclick="gasometria()" type="button" class="btn btn-outline-primary">Gasometria</button>
       <br>
-      <br><span id="PHr" style="font-weight:bold;color:#35d68d"></span>
+      <br><span id="PHr" style="font-weight:bold;color:#007bff"></span>
       <br>
 
 
