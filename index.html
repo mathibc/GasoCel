@@ -438,8 +438,8 @@
 
 			else if(PH > 7.45 && HCO3>26 && PCO2>=PCO2EXPALCMET){
         a = "Alcalose Metabólica";
-        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar a fórmula PCO2 esperado = HCO3 +15.";
-        c = "Caso o valor do PCO2 esperado for igual ao valor na gasometria, o quadro é agudo, se estiver alterada, o quadro é crônico.";
+        b = "Observação: Para avaliar se tal quadro possui caracteristica Compensada ou Descompensada deve-se utilizar a fórmula PCO2 esperado = HCO3 +15.";
+        c = "";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
         document.getElementById("AR2").innerHTML = PCO2EXPALCMET
@@ -449,8 +449,8 @@
 			else if(PH < 7.35 && HCO3<22 && PCO2<35 && PCO2>=35 && PCO2<=45){
         a = "Acidose Metabólica";
         document.getElementById("AR").innerHTML = a
-        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar a fórmula PCO2 esperado = (1,5 x HCO3) + 8.";
-        c = "Caso o valor do PCO2 esperado for igual ao valor na gasometria, o quadro é aguda, se estiver alterada, o quadro é crônico.";
+        b = "Observação: Para avaliar se tal quadro possui caracteristica Compensada ou Descompensada deve-se utilizar a fórmula PCO2 esperado = (1,5 x HCO3) + 8.";
+        c = "";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
         document.getElementById("AR2").innerHTML = c
@@ -459,8 +459,8 @@
       else if(PH < 7.35 && HCO3<22){
         a = "Acidose Metabólica";
         document.getElementById("AR").innerHTML = a
-        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar a fórmula PCO2 esperado = (1,5 x HCO3) + 8.";
-        c = "Caso o valor do PCO2 esperado for igual ao valor na gasometria, o quadro é aguda, se estiver alterada, o quadro é crônico.";
+        b = "Observação: Para avaliar se tal quadro possui caracteristica Compensada ou Descompensada deve-se utilizar a fórmula PCO2 esperado = (1,5 x HCO3) + 8.";
+        c = "";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
         document.getElementById("AR2").innerHTML = c
