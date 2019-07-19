@@ -315,7 +315,7 @@
       var c;
 
       if(PH>=7.35 && PH<=7.45 && PCO2<35 && HCO3<22){
-        a = " O valor do PH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Respiratória e Acidose Metabólica, visto que o HCO3 e PCO2 estão alterados.";
+        a = " O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Respiratória e Acidose Metabólica, visto que o HCO3 e PCO2 estão alterados.";
         document.getElementById("AR").innerHTML = a
         b="";
         document.getElementById("AR1").innerHTML = b
@@ -347,7 +347,7 @@
       }
 
       else if (PH>7.35 && PH<7.45 && HCO3<22&& PCO2<=45 && PCO2>=35){
-        a = "O valor do PH se encontra dentro da normalidade. Entretanto, trata-se de uma Acidose Metabólica, visto que o HCO3 está alterado.";
+        a = "O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Acidose Metabólica, visto que o HCO3 está alterado.";
         b="";
         c="";
         document.getElementById("AR1").innerHTML = b
@@ -357,7 +357,7 @@
         document.getElementById("AR").innerHTML = a
       }
       else if (PH>7.35 && PH<7.45 && HCO3>26 && PCO2<=45 && PCO2>=35){
-        a = "O valor do PH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Metabólica, visto que o HCO3 está alterado. ";
+        a = "O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Metabólica, visto que o HCO3 está alterado. ";
         document.getElementById("AR").innerHTML = a
         b="";
         c="";
@@ -366,7 +366,7 @@
         //pco2exp
       }
       else if (PH>7.35 && PH<7.45 && HCO3>=22 && HCO3<=26 && PCO2>45 ){
-        a = "O valor do PH se encontra dentro da normalidade. Entretanto, trata-se de uma Acidose Respiratória, visto que o PCO2 está alterado.";
+        a = "O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Acidose Respiratória, visto que o PCO2 está alterado.";
         document.getElementById("AR").innerHTML = a
         b="";
         c="";
@@ -374,7 +374,7 @@
         document.getElementById("AR2").innerHTML = c
       }
       else if (PH>7.35 && PH<7.45 && HCO3>=22 && HCO3<=26 && PCO2<35){
-        a = "O valor do PH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Respiratória, visto que o PCO2 está alterado. ";
+        a = "O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Respiratória, visto que o PCO2 está alterado. ";
         document.getElementById("AR").innerHTML = a
         b="";
         c="";
@@ -382,7 +382,7 @@
         document.getElementById("AR2").innerHTML = c
       }
       else if (PH>7.35 && PH<7.45 && PCO2>45 && HCO3>26){
-        a = " O valor do PH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Metabólica e Acidose Respiratória, visto que o HCO3 e PCO2 estão alterados.";
+        a = " O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Metabólica e Acidose Respiratória, visto que o HCO3 e PCO2 estão alterados.";
         document.getElementById("AR").innerHTML = a
         b="";
         c="";
@@ -400,7 +400,7 @@
       else if(PH > 7.45 && HCO3>26 && PCO2EXPALCMET>PCO2 && ALCALOSERESPAGUDA>HCO3 && ALCALOSERESPCRONICA>HCO3){
         a = "Alcalose Mista";
 
-        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o PH básico.";
+        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o pH básico.";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
         c="";
@@ -431,7 +431,7 @@
       }
 			else if(PH < 7.35 && PCO2>45 && HCO3<22){
         a = "Acidose Mista";
-        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o PH ácido.";
+        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o pH ácido.";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
 
@@ -447,7 +447,7 @@
 			else if(PH > 7.45 && HCO3>26 && PCO2<35){
         a = "Alcalose Mista";
 
-        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o PH básico.";
+        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o pH básico.";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
         c="";
