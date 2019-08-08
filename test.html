@@ -127,40 +127,53 @@
 	  <br>
 
     <!-- myChart -->
-    <div class="container">
+    <div class="container" >
 	     <canvas id="myChart"></canvas>
     </div>
-	  <br><br>
-
+    <br><br>
+    <!--
+    <div class="container" >
+       <canvas id="myChart2"></canvas>
+    </div>
+    <br><br>
+    <div class="container">
+       <canvas id="myChart3"></canvas>
+    </div>*/
     <!-- myChart Logic -->
     <script>
     var c =0.01;
     var PCO2;
     var PH ;
     var HCO3;
+    var PCO2EXP;
+    var PCO2EXPALCMET;
+    var ALCALOSERESPAGUDA;
+    var ALCALOSERESPCRONICA;
+    var ACIDOSESERESPAGUDA;
+    var ACIDOSERESPCRONICA;
 		var resposta;
     var chartColors={
       color1: '#9a0000',
       color3: '#0017b0',
       color2: '#1f8e19'
     }
-
-
-
-
     function gasometria(){
       this.PCO2 = document.getElementById("pCO2r").value;
       this.HCO3 = document.getElementById("HCO3r").value;
+      PCO2EXP = (1.5*this.HCO3)+8;
+      PCO2EXPALCMET = 15+1*this.HCO3;
+      ALCALOSERESPAGUDA = 24-Math.abs(40-1*this.PCO2)/5;
+      ALCALOSERESPCRONICA = 24.0-Math.abs(40-1*this.PCO2)/2;
+      ACIDOSESERESPAGUDA = 24.0+(Math.abs(40-PCO2)/5);
+      ACIDOSERESPCRONICA = 24.0+(Math.abs(40-PCO2)/2.5);
       var H = HCO3/(0.03*PCO2);
       var b;
 	    this.PH =6.1 + Math.log10(H);
-
 	    massPopChart.data.datasets[0].data[0] = PCO2;
       massPopChart.data.datasets[0].data[2] = PH;
       massPopChart.data.datasets[0].data[1] = HCO3;
   	    /*massPopChart3.data.datasets[0].data[0] = PH;
   	    massPopChart2.data.datasets[0].data[0] = HCO3;*/
-
         for (var i = 0; i <= dataset.data.length; i++) {
     if (dataset.data[2] <7.35) {
       dataset.backgroundColor[2] = chartColors.color1;
@@ -175,30 +188,24 @@
      massPopChart.update();
     }
   }
-
   		massPopChart.update();
       /*	massPopChart2.update();
         	massPopChart3.update();*/
 	    b = "O valor do pH é: "+PH;
       document.getElementById("PHr").innerHTML = b
-
     }
-
     let myChart = document.getElementById('myChart').getContext('2d');
-
 	  let massPopChart = new Chart (myChart,{
-      type:'polarArea', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
+      type:'horizontalBar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
       data:{
         labels:['pCO2 mmHg', 'HCO3- mEq/L','pH'],
         datasets:[{
           label:'Valor',
           data:[
             PCO2,HCO3,PH
-
           ],
           backgroundColor:[
             '#690057','#f1f41f','#234234'
-
           ]
         }]
       },
@@ -221,9 +228,6 @@
       },
       options: {}
     });
-
-
-
     let myChart3 = document.getElementById('myChart3').getContext('2d');
 	  let massPopChart3 = new Chart (myChart3,{
       type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
@@ -235,8 +239,6 @@
             PH
           ],
           backgroundColor:[
-
-
           ]
         }]
       },
@@ -244,7 +246,6 @@
     });
 */
     var dataset = massPopChart.data.datasets[0];
-
       /*if (dataset.data[0] < 7.35) {
         dataset.backgroundColor[0] = chartColors.color1;
         massPopChart3.update();
@@ -257,135 +258,202 @@
        dataset.backgroundColor[0] = chartColors.color3;
        massPopChart3.update();
      }*/
-
-
-
-
-
-
-
-
-
-
-
     function showDiv() {
        document.getElementById('welcomeDiv').style.display = "block";
     }
     function showAnswer(){
       var a;
+      var b;
+      var c;
+      if(PH>=7.35 && PH<=7.45 && PCO2<35 && HCO3<22){
+        a = " O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Respiratória e Acidose Metabólica, visto que o HCO3 e PCO2 estão alterados.";
+        document.getElementById("AR").innerHTML = a
+        b="";
+        document.getElementById("AR1").innerHTML = b
+        c="";
+        document.getElementById("AR2").innerHTML = c
+      }
+      else if (PH<7.35 && HCO3<22 && PCO2EXP<PCO2){
+          a = "Acidose Mista";
+          b = "No qual o valor esperado para o PCO2 é:";
+          document.getElementById("AR").innerHTML = a
+          document.getElementById("AR1").innerHTML = b
+          document.getElementById("AR2").innerHTML = PCO2EXP+"<br>Dada a fórmula de Winter: 1,5*HCO3 + 8";
 
-      if(PH>7.35 && PH<7.45 && PCO2<35 && HCO3<22){
-        a = " O valor do PH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Respiratória e Acidose Metabólica, visto que o HCO3 e PCO2 estão alterados.";
-        document.getElementById("AR").innerHTML = a
+      }
+      else if (PH<7.35 && HCO3<22 && PCO2>=35 && PCO2<=45 && PCO2EXP==PCO2){
+          a = "Acidose Metabolica";
+          b = "";
+          c = "";
+
+
+          document.getElementById("AR").innerHTML = a
+          document.getElementById("AR1").innerHTML = b
+          document.getElementById("AR2").innerHTML = c
 
       }
-      else if (PH>7.35 && PH<7.45 && HCO3<22){
-        a = "O valor do PH se encontra dentro da normalidade. Entretanto, trata-se de uma Acidose Metabólica, visto que o HCO3 está alterado.";
+
+      else if (PH>7.35 && PH<7.45 && HCO3<22&& PCO2<=45 && PCO2>=35){
+        a = "O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Acidose Metabólica, visto que o HCO3 está alterado.";
+        b="";
+        c="";
+        document.getElementById("AR1").innerHTML = b
+        document.getElementById("AR2").innerHTML = c
+
+
         document.getElementById("AR").innerHTML = a
       }
-      else if (PH>7.35 && PH<7.45 && HCO3>26){
-        a = "O valor do PH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Metabólica, visto que o HCO3 está alterado. ";
+      else if (PH>7.35 && PH<7.45 && HCO3>26 && PCO2<=45 && PCO2>=35){
+        a = "O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Metabólica, visto que o HCO3 está alterado. ";
         document.getElementById("AR").innerHTML = a
+        b="";
+        c="";
+        document.getElementById("AR1").innerHTML = b
+        document.getElementById("AR2").innerHTML = c
+        //pco2exp
       }
-      else if (PH>7.35 && PH<7.45 && PCO2>45){
-        a = "O valor do PH se encontra dentro da normalidade. Entretanto, trata-se de uma Acidose Respiratória, visto que o PCO2 está alterado.";
+      else if (PH>7.35 && PH<7.45 && HCO3>=22 && HCO3<=26 && PCO2>45 ){
+        a = "O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Acidose Respiratória, visto que o PCO2 está alterado.";
         document.getElementById("AR").innerHTML = a
+        b="";
+        c="";
+        document.getElementById("AR1").innerHTML = b
+        document.getElementById("AR2").innerHTML = c
       }
-      else if (PH>7.35 && PH<7.45 && PCO2<35){
-        a = "O valor do PH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Respiratória, visto que o PCO2 está alterado. ";
+      else if (PH>7.35 && PH<7.45 && HCO3>=22 && HCO3<=26 && PCO2<35){
+        a = "O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Respiratória, visto que o PCO2 está alterado. ";
         document.getElementById("AR").innerHTML = a
+        b="";
+        c="";
+        document.getElementById("AR1").innerHTML = b
+        document.getElementById("AR2").innerHTML = c
       }
       else if (PH>7.35 && PH<7.45 && PCO2>45 && HCO3>26){
-        a = " O valor do PH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Metabólica e Acidose Respiratória, visto que o HCO3 e PCO2 estão alterados.";
+        a = " O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Alcalose Metabólica e Acidose Respiratória, visto que o HCO3 e PCO2 estão alterados.";
         document.getElementById("AR").innerHTML = a
+        b="";
+        c="";
+        document.getElementById("AR1").innerHTML = b
+        document.getElementById("AR2").innerHTML = c
       }
       else if (PH > 7.35 && PH<7.45){
         a = "Dentro dos valores de normalidade de PH";
         document.getElementById("AR").innerHTML = a
-      }
-
-			else if(PH > 7.45 && PCO2<35 && HCO3<22){
-        a = "Alcalose Respiratória";
-        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se avaliar o valor base de Base Excess para estabelecer o diagnóstico correto ou calculá-lo pela fórmula: (HCO3 real – 24) + 14,8 x (pH- 7,4).";
-        c = "Caso o valor de Base Excess estiver fora do seu padrão de normalidade, o quadro é considerado crônico, e se estiver dentro dos valores de normalidade é agudo";
-        document.getElementById("AR").innerHTML = a
+        b="";
+        c="";
         document.getElementById("AR1").innerHTML = b
         document.getElementById("AR2").innerHTML = c
+      }
+      else if(PH > 7.45 && HCO3>26 && PCO2EXPALCMET>PCO2 && ALCALOSERESPAGUDA>HCO3 && ALCALOSERESPCRONICA>HCO3){
+        a = "Alcalose Mista";
+
+        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o pH básico.";
+        document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
+        c="";
+        document.getElementById("AR2").innerHTML = PCO2EXPALCMET
+      }
+			else if(PH > 7.45 && PCO2<35 && ALCALOSERESPAGUDA==HCO3 && ALCALOSERESPCRONICA==HCO3 ){
+        a = "Alcalose Respiratória";
+        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se avaliar o valor base de Base Excess para estabelecer o diagnóstico correto";// ou calculá-lo pela fórmula: (HCO3 real – 24) + 14,8 x (pH- 7,4).";
+        //c = "Caso o valor de Base Excess estiver fora do seu padrão de normalidade, o quadro é considerado crônico, e se estiver dentro dos valores de normalidade é agudo";
+        document.getElementById("AR").innerHTML = a
+        document.getElementById("AR1").innerHTML = b
+        c="";
+        document.getElementById("AR2").innerHTML = "Considerando um quadro agudo o valor de HCO3 esperado é: "+ALCALOSERESPAGUDA+"<br> Considerando um quadro crônico o valor de HCO3 esperado é: "+ALCALOSERESPCRONICA
+
+
       }
 			else if(PH < 7.35 && PCO2>45 && HCO3>26){
         a = "Acidose Respiratória";
-        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se avaliar o valor base de Base Excess para estabelecer o diagnóstico correto ou calculá-lo pela fórmula: (HCO3 real – 24) + 14,8 x (pH- 7,4).";
-        c = "Caso o valor de Base Excess estiver fora do seu padrão de normalidade, o quadro é considerado crônico, e se estiver dentro dos valores de normalidade é agudo";
+        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar: ";
+        //c = "Caso o valor de Base Excess estiver fora do seu padrão de normalidade, o quadro é considerado crônico, e se estiver dentro dos valores de normalidade é agudo";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
-        document.getElementById("AR2").innerHTML = c
+        c="";
+
+        document.getElementById("AR2").innerHTML = "Considerando um quadro agudo o valor de HCO3 esperado é: "+ACIDOSESERESPAGUDA+"<br> Considerando um quadro crônico o valor de HCO3 esperado é: "+ACIDOSERESPCRONICA
+//        document.getElementById("AR2").innerHTML = c
       }
 			else if(PH < 7.35 && PCO2>45 && HCO3<22){
         a = "Acidose Mista";
-        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o PH ácido.";
+        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o pH ácido.";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
+
+        c="";
+
+        document.getElementById("AR2").innerHTML = PCO2EXPALCMET
 
       }
 
 
-			else if(PH > 7.45 && HCO3>26 && PCO2>45){
-        a = "Alcalose Metabólica ";
-        document.getElementById("AR").innerHTML = a
-        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar a fórmula PCO2 esperado = (1,5 x HCO3) + 8.";
-        c = "Caso o valor do PCO2 esperado for igual ao valor na gasometria, o quadro é aguda, se estiver alterada, o quadro é crônico.";
-        document.getElementById("AR").innerHTML = a
-        document.getElementById("AR1").innerHTML = b
-        document.getElementById("AR2").innerHTML = c
 
-      }
+
 			else if(PH > 7.45 && HCO3>26 && PCO2<35){
         a = "Alcalose Mista";
 
-        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o PH básico.";
+        b = "Devido existir tanto um componente respiratória quanto um metabólico tornando o pH básico.";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
+        c="";
+        document.getElementById("AR2").innerHTML = "O valor esperado de pCO2 é: "+PCO2EXPALCMET
+      }		else if(PH > 7.45 && HCO3>26 && PCO2<=PCO2EXPALCMET){
+              a = "Alcalose Metabólica";
+              b = "Observação: Para avaliar se tal quadro possui caracteristica deve-se utilizar a fórmula PCO2 esperado = HCO3 +15.";
+              c = "";
+              document.getElementById("AR").innerHTML = a
+              document.getElementById("AR1").innerHTML = b
+              document.getElementById("AR2").innerHTML = "O valor esperado de pCO2 é: "+PCO2EXPALCMET
+
       }
-			else if(PH > 7.45 && HCO3>26){
-        a = "Alcalose Metabólica";
-        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar a fórmula PCO2 esperado = HCO3 +15.";
-        c = "Caso o valor do PCO2 esperado for igual ao valor na gasometria, o quadro é agudo, se estiver alterada, o quadro é crônico.";
-        document.getElementById("AR").innerHTML = a
-        document.getElementById("AR1").innerHTML = b
-        document.getElementById("AR2").innerHTML = c
 
-}
 
-			else if(PH < 7.35 && HCO3<22 && PCO2<35){
+
+			else if(PH < 7.35 && HCO3<22 && PCO2<35 && PCO2>=35 && PCO2<=45){
         a = "Acidose Metabólica";
         document.getElementById("AR").innerHTML = a
-        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar a fórmula PCO2 esperado = (1,5 x HCO3) + 8.";
-        c = "Caso o valor do PCO2 esperado for igual ao valor na gasometria, o quadro é aguda, se estiver alterada, o quadro é crônico.";
+        b = "Observação: Para avaliar se tal quadro deve-se utilizar a fórmula PCO2 esperado = (1,5 x HCO3) + 8.";
+        c = "";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
-        document.getElementById("AR2").innerHTML = c
+        document.getElementById("AR2").innerHTML = "No qual o resultado é: "+PCO2EXP
 
       }
       else if(PH < 7.35 && HCO3<22){
         a = "Acidose Metabólica";
         document.getElementById("AR").innerHTML = a
-        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar a fórmula PCO2 esperado = (1,5 x HCO3) + 8.";
-        c = "Caso o valor do PCO2 esperado for igual ao valor na gasometria, o quadro é aguda, se estiver alterada, o quadro é crônico.";
+        b = "Observação: Para avaliar se tal quadro deve-se utilizar a fórmula PCO2 esperado = (1,5 x HCO3) + 8.";
+        c = "";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
-        document.getElementById("AR2").innerHTML = c
+        document.getElementById("AR2").innerHTML = "No qual o resultado é: "+PCO2EXP
       }
 
     else if(PH < 7.35 && PCO2>45){
       a = "Acidose Respiratória";
       document.getElementById("AR").innerHTML = a
+      b="Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar: ";
+      c="";
+      document.getElementById("AR1").innerHTML = b
+      document.getElementById("AR2").innerHTML = "Considerando um quadro agudo o valor de HCO3 esperado é: "+ACIDOSESERESPAGUDA+"<br> Considerando um quadro crônico o valor de HCO3 esperado é: "+ACIDOSERESPCRONICA
     }
 
       else if(PH > 7.45 && PCO2<35){
         a = "Alcalose Respiratória";
         document.getElementById("AR").innerHTML = a
+        b="";
+        c="";
+        document.getElementById("AR2").innerHTML = "Considerando um quadro agudo o valor de HCO3 esperado é: "+ALCALOSERESPAGUDA+"<br> Considerando um quadro crônico o valor de HCO3 esperado é: "+ALCALOSERESPCRONICA
+        document.getElementById("AR1").innerHTML = b
       }
     }
+
+    function MistoMetabolica(){
+      var PCO2exp = Math.abs(1.5*(HCO3+8));
+
+    }
+
 
 
 		function Compensação1(){
@@ -502,7 +570,6 @@
       <br>
 
 
-
 	<br><br>
 
 
@@ -515,38 +582,25 @@
   <input type="button" name="answer" class="btn btn-outline-secondary" value="Resposta" onclick="showAnswer()" /><br><br>
   <span id="AR" style="font-weight:bold;color:grey"></span>
   <br>
+  <br>
   <span id="AR1" style="font-weight:bold;color:grey"></span>
+  <br>
+  <br>
+  <span id="AR2" style="font-weight:bold;color:grey"></span>
 
 </div>
 </center>
 
 <script>
-
-
-
 </script>
 
 <script>
-
 var slideCol = document.getElementById("pCO2r");
-
 var x = document.getElementById("pCO2x");
-
-
 x.innerHTML = slideCol.value;
-
-
-
-
 slideCol.oninput = function() {
     x.innerHTML = this.value;
 }
-
-
-
-
-
-
 </script>
 
 <script>
@@ -555,10 +609,7 @@ var y = document.getElementById("HCO3y");
 y.innerHTML = slideSq.value;
 slideSq.oninput = function() {
     y.innerHTML = this.value;
-
 }
-
-
 </script>
 <br><br><br><br>
 
