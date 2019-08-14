@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="authors" content="Matheus<!DOCTYPE html>
-<html lang="pt">
 
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -137,22 +131,6 @@
 
     </div>
     <br><br>
-    <!--
-    <div class="container" >
-
-       <canvas id="myChart2"></canvas>
-
-
-
-    </div>
-    <br><br>
-    <div class="container">
-
-       <canvas id="myChart3"></canvas>
-
-
-    </div>*/
-
 
 
 
@@ -196,8 +174,6 @@
 	    massPopChart.data.datasets[0].data[0] = PCO2;
       massPopChart.data.datasets[0].data[2] = PH;
       massPopChart.data.datasets[0].data[1] = HCO3;
-  	    /*massPopChart3.data.datasets[0].data[0] = PH;
-  	    massPopChart2.data.datasets[0].data[0] = HCO3;*/
 
         for (var i = 0; i <= dataset.data.length; i++) {
     if (dataset.data[2] <7.35) {
@@ -215,9 +191,7 @@
   }
 
   		massPopChart.update();
-      /*	massPopChart2.update();
-        	massPopChart3.update();*/
-	    b = "O valor do pH é: "+PH;
+      b = "O valor do pH é: "+PH;
       document.getElementById("PHr").innerHTML = b
 
     }
@@ -242,69 +216,8 @@
       },
       options: {}
     });
-    /*let myChart2 = document.getElementById('myChart2').getContext('2d');
-	  let massPopChart2 = new Chart (myChart2,{
-      type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
-      data:{
-        labels:['HCO3- mEq/L'],
-        datasets:[{
-          label:'Valor',
-          data:[
-            HCO3
-          ],
-          backgroundColor:[
-          '#f1f41f'
-          ]
-        }]
-      },
-      options: {}
-    });
 
-
-
-    let myChart3 = document.getElementById('myChart3').getContext('2d');
-	  let massPopChart3 = new Chart (myChart3,{
-      type:'bar', //bar,horizontalBar,pie,line,doughnut,radar,polarArea
-      data:{
-        labels:['pH'],
-        datasets:[{
-          label:'Valor',
-          data:[
-            PH
-          ],
-          backgroundColor:[
-
-
-          ]
-        }]
-      },
-      options: {}
-    });
-*/
     var dataset = massPopChart.data.datasets[0];
-
-      /*if (dataset.data[0] < 7.35) {
-        dataset.backgroundColor[0] = chartColors.color1;
-        massPopChart3.update();
-      }
-      else if ((dataset.data[0] >= 7.35) && (dataset.data[0] <= 7.45)){
-        dataset.backgroundColor[0] = chartColors.color2;
-        massPopChart3.update();
-      }
-      else if (PH > 7.45){
-       dataset.backgroundColor[0] = chartColors.color3;
-       massPopChart3.update();
-     }*/
-
-
-
-
-
-
-
-
-
-
 
     function showDiv() {
        document.getElementById('welcomeDiv').style.display = "block";
@@ -363,7 +276,7 @@
         c="";
         document.getElementById("AR1").innerHTML = b
         document.getElementById("AR2").innerHTML = c
-        //pco2exp
+
       }
       else if (PH>7.35 && PH<7.45 && HCO3>=22 && HCO3<=26 && PCO2>45 ){
         a = "O valor do pH se encontra dentro da normalidade. Entretanto, trata-se de uma Acidose Respiratória, visto que o PCO2 está alterado.";
@@ -408,8 +321,7 @@
       }
 			else if(PH > 7.45 && PCO2<35 && ALCALOSERESPAGUDA==HCO3 && ALCALOSERESPCRONICA==HCO3 ){
         a = "Alcalose Respiratória";
-        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se avaliar o valor base de Base Excess para estabelecer o diagnóstico correto";// ou calculá-lo pela fórmula: (HCO3 real – 24) + 14,8 x (pH- 7,4).";
-        //c = "Caso o valor de Base Excess estiver fora do seu padrão de normalidade, o quadro é considerado crônico, e se estiver dentro dos valores de normalidade é agudo";
+        b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se avaliar o valor base de Base Excess para estabelecer o diagnóstico correto";
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
 
@@ -421,13 +333,12 @@
 			else if(PH < 7.35 && PCO2>45 && HCO3>26){
         a = "Acidose Respiratória";
         b = "Observação: Para avaliar se tal quadro possui caracteristica Aguda ou Crônica deve-se utilizar: ";
-        //c = "Caso o valor de Base Excess estiver fora do seu padrão de normalidade, o quadro é considerado crônico, e se estiver dentro dos valores de normalidade é agudo";
+
         document.getElementById("AR").innerHTML = a
         document.getElementById("AR1").innerHTML = b
         c="";
 
         document.getElementById("AR2").innerHTML = "Considerando um quadro agudo o valor de HCO3 esperado é: "+ACIDOSESERESPAGUDA+"<br> Considerando um quadro crônico o valor de HCO3 esperado é: "+ACIDOSERESPCRONICA
-//        document.getElementById("AR2").innerHTML = c
       }
 			else if(PH < 7.35 && PCO2>45 && HCO3<22){
         a = "Acidose Mista";
@@ -612,10 +523,10 @@
     <div class="slider">
     <form name="formulario" method="get" action="">
       Insira o valor da pCO2: <input id="pCO2r" type="number" class="pCO2" name="foo" placeholder="" min="" max="" style="width: 130px">
-      <!--<br><br> <span>Valor pCO2:</span> <span id="pCO2x" style="font-weight:bold;color:#690057"></span>-->
+
 <br><br>
       Insira o valor de HCO3: <input id="HCO3r" type="number" class="HCO3" name="foo" placeholder="" min="" max="" style="width: 130px"><br>
-      <!--<br><span>Valor HCO3:</span> <span id="HCO3y" style="font-weight:bold;color:#f1f41f"></span><br>-->
+
       <br>
       <br>
       <button  onclick="gasometria()" type="button" class="btn btn-outline-primary">Gasometria</button>
@@ -739,70 +650,6 @@ slideSq.oninput = function() {
 
 
 
-    <!-- Main Content -->
-    <!--<div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="post-preview">
-            <a href="post.html">
-              <h2 class="post-title">
-                Man must explore, and this is exploration at its greatest
-              </h2>
-              <h3 class="post-subtitle">
-                Problems look mighty small from 150 miles up
-              </h3>
-            </a>
-            <p class="post-meta">Posted by
-              <a href="#">Start Bootstrap</a>
-              on September 24, 2018</p>
-          </div>
-          <hr>
-          <div class="post-preview">
-            <a href="post.html">
-              <h2 class="post-title">
-                I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-              </h2>
-            </a>
-            <p class="post-meta">Posted by
-              <a href="#">Start Bootstrap</a>
-              on September 18, 2018</p>
-          </div>
-          <hr>
-          <div class="post-preview">
-            <a href="post.html">
-              <h2 class="post-title">
-                Science has not yet mastered prophecy
-              </h2>
-              <h3 class="post-subtitle">
-                We predict too much for the next year and yet far too little for the next ten.
-              </h3>
-            </a>
-            <p class="post-meta">Posted by
-              <a href="#">Start Bootstrap</a>
-              on August 24, 2018</p>
-          </div>
-          <hr>
-          <div class="post-preview">
-            <a href="post.html">
-              <h2 class="post-title">
-                Failure is not an option
-              </h2>
-              <h3 class="post-subtitle">
-                Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-              </h3>
-            </a>
-            <p class="post-meta">Posted by
-              <a href="#">Start Bootstrap</a>
-              on July 8, 2018</p>
-          </div>
-          <hr>
-          <!-- Pager -->
-          <!--<div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <hr>
     <!-- Footer -->
@@ -836,4 +683,3 @@ slideSq.oninput = function() {
   </body>
 
 </html>
- 
