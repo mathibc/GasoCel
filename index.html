@@ -37,49 +37,10 @@
   /* The slider itself */
   .pCO2 {
 
-      width: 100%; /* Full-width */
-      height: 25px; /* Specified height */
-      background: #d3d3d3; /* Grey background */
-      padding: 5px 5px 5px 5px;
-      outline: none; /* Remove outline */
-      opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-      -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-      transition: opacity .2s;
-      -webkit-tap-highlight-color: transparent;
-      -webkit-writing-mode: horizontal-tb !important;
-      text-rendering: auto;
-      color: initial;
-      letter-spacing: normal;
-      word-spacing: normal;
-      text-transform: none;
-      text-indent: 0px;
-      text-shadow: none;
-      display: inline-block;
-      text-align: start;
+      background: #d3d3d3;
       
   }.HCO3 {
-      -webkit-appearance: none;  /* Override default CSS styles */
-      appearance: none;
-      width: 100%; /* Full-width */
-      height: 25px; /* Specified height */
-      background: #d3d3d3; /* Grey background */
-      padding: 5px 5px 5px 5px;
-      outline: none; /* Remove outline */
-      opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-      -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-      transition: opacity .2s;
-      -webkit-tap-highlight-color: transparent;
-      -webkit-writing-mode: horizontal-tb !important;
-      text-rendering: auto;
-      color: initial;
-      letter-spacing: normal;
-      word-spacing: normal;
-      text-transform: none;
-      text-indent: 0px;
-      text-shadow: none;
-      display: inline-block;
-      text-align: start;
-
+     background: #d3d3d3;
   }
 
 
@@ -545,7 +506,7 @@
     <center>
       <div class="slider">
       <form name="formulario" method="get" action="">
-        Insira o valor da pCO2: <input id="pCO2r"  inputmode="numeric" pattern="[0-9]*" type="number" name="foo" placeholder="" min="" max="" style="width: 130px" style ="height: 250px" style="position: absolute" style="padding: 5px 5px 5px 5px">
+        Insira o valor da pCO2: <input id="pCO2r"  inputmode="numeric" pattern="[0-9]*" type="number" class="pCO2" name="foo" placeholder="" min="" max="" style="width: 130px" style ="height: 250px" style="position: absolute" style="padding: 5px 5px 5px 5px">
 
   <br><br>
         Insira o valor de HCO3: <input id="HCO3r"  type="number" inputmode="numeric" pattern="[0-9]*" class="HCO3" name="foo" placeholder="" min="" max="" style="width: 130px" style ="height: 250px" style="position: absolute" style="padding: 5px 5px 5px 5px"><br>
